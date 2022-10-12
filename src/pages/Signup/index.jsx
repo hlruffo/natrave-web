@@ -30,7 +30,7 @@ export const Signup = () => {
 
             const res = await axios({
                 method: 'post',
-                baseURL: 'http://localhost:3000',
+                baseURL: 'https://natrave-web-two-livid.vercel.app',
                 url: '/users',
                 data: values
             })
