@@ -16,7 +16,7 @@ export const Card = ({ disabled, gameId, homeTeam, awayTeam, homeTeamScore, away
         onSubmit: (values) => {
             axios({
                 method: 'post',
-                baseURL: 'https://natrave-web-two-livid.vercel.app',
+                baseURL: 'https://natrave-api-chi.vercel.app/',
                 url: '/hunches',
                 headers: {
                     authorization: `Bearer ${auth.acessToken}`
