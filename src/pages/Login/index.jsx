@@ -12,7 +12,7 @@ import axios from 'axios'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useLocalStorage } from 'react-use'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 const validationSchema = yup.object().shape({
@@ -52,43 +52,43 @@ export const Login = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-      if (user.id) {
-        navigate('/dashboard');
-        setStatus((prevState) => ({ ...prevState, loading: false }));
-      }
+        if (user.id) {
+            navigate('/dashboard');
+            setStatus((prevState) => ({ ...prevState, loading: false }));
+        }
     }, [user]);
-  
+
     useEffect(() => {
-      if (auth && !user.id) {
-        setStatus((prevState) => ({ ...prevState, loading: true }));
-  
-        axios(`${import.meta.env.VITE_BASE_URL}/login`, {
-          headers: {
-            authorization: `Bearer ${auth}`,
-          },
-        })
-          .then((res) => {
-            if (res?.data?.id) {
-              const { name, username, email, id } = res.data;
-  
-              setUser({
-                type: 'ADD_ALL',
-                payload: {
-                  name,
-                  username,
-                  email,
-                  id,
+        if (auth && !user.id) {
+            setStatus((prevState) => ({ ...prevState, loading: true }));
+
+            axios(`${import.meta.env.VITE_BASE_URL}/login`, {
+                headers: {
+                    authorization: `Bearer ${auth}`,
                 },
-              });
-            }
-          })
-          .catch((e) => {
-            setStatus({
-              isWrong: true,
-              message: 'Entre novamente!',
-            });
-          });
-      }
+            })
+                .then((res) => {
+                    if (res?.data?.id) {
+                        const { name, username, email, id } = res.data;
+
+                        setUser({
+                            type: 'ADD_ALL',
+                            payload: {
+                                name,
+                                username,
+                                email,
+                                id,
+                            },
+                        });
+                    }
+                })
+                .catch((e) => {
+                    setStatus({
+                        isWrong: true,
+                        message: 'Entre novamente!',
+                    });
+                });
+        }
     }, [auth]);
 
     return (
