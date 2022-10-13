@@ -28,7 +28,7 @@ export const Login = () => {
 
             const res = await axios({
                 method: 'get',
-                baseURL: 'https://natrave-api-chi.vercel.app/',
+                baseURL: import.meta.env.VITE_API_URL,
                 url: '/login',
                 auth: {
                     username: values.email,

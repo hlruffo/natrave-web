@@ -36,7 +36,7 @@ export const Profile = () => {
     const [games, fetchGames] = useAsyncFn(async (params) => {
         const res = await axios({
             method: 'get',
-            baseURL: 'https://natrave-api-chi.vercel.app/',
+            baseURL: import.meta.env.VITE_API_URL,
             url: '/games',
             params
         })

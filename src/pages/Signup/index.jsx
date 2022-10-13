@@ -31,7 +31,7 @@ export const Signup = () => {
 
             const res = await axios({
                 method: 'post',
-                baseURL: 'https://natrave-api-chi.vercel.app/',
+                baseURL: import.meta.env.VITE_API_URL,
                 url: '/users',
                 data: values
             })
