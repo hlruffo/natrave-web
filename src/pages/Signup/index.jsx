@@ -31,7 +31,7 @@ export const Signup = () => {
 
             const res = await axios({
                 method: 'post',
-                baseURL: 'natrave-api-chi.vercel.app',
+                baseURL: 'https://natrave-api-chi.vercel.app/',
                 url: '/users',
                 data: values
             })
