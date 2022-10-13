@@ -12,9 +12,8 @@ import axios from 'axios'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useLocalStorage } from 'react-use'
-import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
- 
+import { Navigate } from 'react-router-dom'
+
 
 const validationSchema = yup.object().shape({
 
@@ -50,47 +49,10 @@ export const Login = () => {
         validationSchema
     })
 
-    const navigate = useNavigate();
+    if (auth?.user?.id) {
+        return <Navigate to="/dashboard" replace={true} />
 
-    useEffect(() => {
-        if (user.id) {
-            navigate('/dashboard');
-            setStatus((prevState) => ({ ...prevState, loading: false }));
-        }
-    }, [user]);
-
-    useEffect(() => {
-        if (auth && !user.id) {
-            setStatus((prevState) => ({ ...prevState, loading: true }));
-
-            axios(`${import.meta.env.VITE_BASE_URL}/login`, {
-                headers: {
-                    authorization: `Bearer ${auth}`,
-                },
-            })
-                .then((res) => {
-                    if (res?.data?.id) {
-                        const { name, username, email, id } = res.data;
-
-                        setUser({
-                            type: 'ADD_ALL',
-                            payload: {
-                                name,
-                                username,
-                                email,
-                                id,
-                            },
-                        });
-                    }
-                })
-                .catch((e) => {
-                    setStatus({
-                        isWrong: true,
-                        message: 'Entre novamente!',
-                    });
-                });
-        }
-    }, [auth]);
+    }
 
     return (
         <div>
