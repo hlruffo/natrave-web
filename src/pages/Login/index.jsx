@@ -9,7 +9,7 @@
 //como os campos de inserção de email e senha serão estilizados igual, podemos definir o input como função
 import { Icon, Input } from '~/components'
 import axios from 'axios'
-import { useFormik } from 'formik'
+import { useFormik, validateYupSchema } from 'formik'
 import * as yup from 'yup'
 import { useLocalStorage } from 'react-use'
 import { Navigate } from 'react-router-dom'
@@ -25,21 +25,21 @@ export const Login = () => {
     const [auth, setAuth] = useLocalStorage('auth', {})
     const formik = useFormik({
         onSubmit:
-        async function login () {
-            const { data } = await axios.get(`${corsHeroku}https://natrave-api-chi.vercel.app/login`, {
-              auth: {
-                username: 'hlruffo@gmail.com',
-              password: '123'
+            async function login() {
+                const { data } = await axios.get(`${corsHeroku}https://natrave-api-chi.vercel.app/login`, {
+                    auth: {
+                        username: values.email,
+                        password: values.password
+                    }
+                });
+
+                app.innerHTML = JSON.stringify(data, null, 2);
             }
-          });
-          
-          app.innerHTML = JSON.stringify(data, null, 2);
-        }
-        
-        
-        
-        
-        
+
+
+
+
+
         /*  async (values) => {
 
             const res = await axios({
@@ -54,8 +54,8 @@ export const Login = () => {
 
             setAuth(res.data)
  */
-            /* localStorage.setItem('auth', JSON.stringify(res.data))*/
-            /*localStorage.getItem('auth', JSON.parse(auth)) para pegar o objeto sem strings*/
+        /* localStorage.setItem('auth', JSON.stringify(res.data))*/
+        /*localStorage.getItem('auth', JSON.parse(auth)) para pegar o objeto sem strings*/
 
         /* },
         initialValues: {
