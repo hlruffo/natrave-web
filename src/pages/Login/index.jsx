@@ -22,6 +22,9 @@ const validationSchema = yup.object().shape({
 })
 
 export const Login = () => {
+    const app = document.querySelector("#app");
+    const action = document.querySelector("#action");
+    const corsHeroku = "https://cors-anywhere.herokuapp.com/";
     const [auth, setAuth] = useLocalStorage('auth', {})
     const formik = useFormik({
         onSubmit:
