@@ -44,6 +44,7 @@ export const Card = ({ disabled, gameId, homeTeam, awayTeam, homeTeamScore, away
 
                 <input
                     type="number"
+                    min="0"
                     className="bg-red-300/[0.2]  w-[55px] h-[55px] text-red-700 text-xl text-center"
                     name="homeTeamScore"
                     value={formik.values.homeTeamScore}
@@ -55,6 +56,7 @@ export const Card = ({ disabled, gameId, homeTeam, awayTeam, homeTeamScore, away
                 </span>
                 <input
                     type="number"
+                    min="0"
                     className="bg-red-300/[0.2]  w-[55px] h-[55px] text-red-700 text-xl text-center "
                     name="awayTeamScore"
                     value={formik.values.awayTeamScore}
