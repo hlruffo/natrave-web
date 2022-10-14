@@ -24,11 +24,27 @@ const validationSchema = yup.object().shape({
 export const Login = () => {
     const [auth, setAuth] = useLocalStorage('auth', {})
     const formik = useFormik({
-        onSubmit: async (values) => {
+        onSubmit:
+        async function login () {
+            const { data } = await axios.get(`${corsHeroku}https://natrave-api-chi.vercel.app/login`, {
+              auth: {
+                username: 'hlruffo@gmail.com',
+              password: '123'
+            }
+          });
+          
+          app.innerHTML = JSON.stringify(data, null, 2);
+        }
+        
+        
+        
+        
+        
+        /*  async (values) => {
 
             const res = await axios({
                 method: 'get',
-                baseURL: "https://natrave-api-chi.vercel.app/",
+                baseURL: import.meta.env.VITE_API_URL,
                 url: '/login',
                 auth: {
                     username: values.email,
@@ -37,16 +53,16 @@ export const Login = () => {
             })
 
             setAuth(res.data)
-
+ */
             /* localStorage.setItem('auth', JSON.stringify(res.data))*/
             /*localStorage.getItem('auth', JSON.parse(auth)) para pegar o objeto sem strings*/
 
-        },
+        /* },
         initialValues: {
             email: '',
             password: ''
         },
-        validationSchema
+        validationSchema */
     })
 
     if (auth?.user?.id) {
