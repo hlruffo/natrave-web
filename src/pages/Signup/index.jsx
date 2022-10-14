@@ -36,7 +36,7 @@ export const Signup = () => {
                 data: values
             })
 
-            console.log(res.data)
+           setAuth(res.data)
 
         },
         initialValues: {
@@ -47,9 +47,7 @@ export const Signup = () => {
         },
         validationSchema
     })
-    console.log(formik.errors)
-
-    if (auth?.user?.id) {
+       if (auth?.user?.id) {
         return <Navigate to="/dashboard" replace={true} />
 
     }
