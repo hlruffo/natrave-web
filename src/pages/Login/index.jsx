@@ -22,22 +22,9 @@ const validationSchema = yup.object().shape({
 })
 
 export const Login = () => {
-
-   /*  const app = document.querySelector("#app");
-    const action = document.querySelector("#action");
-    const corsHeroku = "https://cors-anywhere.herokuapp.com/";
-
-    async function login() {
-        const { values } = await axios.get(`${corsHeroku}https://natrave-api-chi.vercel.app/login`, {
-            auth: {
-                username: values.email,
-                password: values.password
-            }
-        }); */
-        const [auth, setAuth] = useLocalStorage('auth', {})
+    const [auth, setAuth] = useLocalStorage('auth', {})
     const formik = useFormik({
-        onSubmit: 
-        async (values) => {
+        onSubmit: async (values) => {
 
             const res = await axios({
                 method: 'get',
@@ -50,68 +37,68 @@ export const Login = () => {
             })
 
             setAuth(res.data)
- 
-        /* localStorage.setItem('auth', JSON.stringify(res.data))*/
-        /*localStorage.getItem('auth', JSON.parse(auth)) para pegar o objeto sem strings
 
-    },
-    initialValues: {
-        email: '',
+            /* localStorage.setItem('auth', JSON.stringify(res.data))*/
+            /*localStorage.getItem('auth', JSON.parse(auth)) para pegar o objeto sem strings*/
+
+        },
+        initialValues: {
+            email: '',
             password: ''
-    },
-    validationSchema
-    )}
+        },
+        validationSchema
+    })
 
-if (auth?.user?.id) {
-    return <Navigate to="/dashboard" replace={true} />
+    if (auth?.user?.id) {
+        return <Navigate to="/dashboard" replace={true} />
 
-}
- 
-return (
-    <div>
-        <header className=" p-4 border-b border-red-300">
-            <div className="container max-w-xl flex justify-center  ">
-                <img src="/imgs/logo-fundo-branco.svg" className="w-32 md:w-40" />
-            </div>
-        </header>
-        <main className=" container max-w-xl p-4">
-            <div className="p-4 flex space-x-4 items-center">
-                <a href="/">
-                    <Icon name="back" className="h-6" />
-                </a>
-                <h2 className="text-xl font-bold">Entre na sua conta</h2>
-            </div>
-            <form className="p-4 space-y-6" onSubmit={formik.handleSubmit}>
-                <Input
-                    type="text"
-                    name="email"
-                    label="Seu e-mail"
-                    placeholder="Digite o seu e-mail"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    error={formik.touched.email && formik.errors.email} />
+    }
 
-                <Input
-                    type="password"
-                    name="password"
-                    label="Sua senha"
-                    placeholder="Digite sua senha"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    error={formik.touched.password && formik.errors.password} />
+    return (
+        <div>
+            <header className=" p-4 border-b border-red-300">
+                <div className="container max-w-xl flex justify-center  ">
+                    <img src="/imgs/logo-fundo-branco.svg" className="w-32 md:w-40" />
+                </div>
+            </header>
+            <main className=" container max-w-xl p-4">
+                <div className="p-4 flex space-x-4 items-center">
+                    <a href="/">
+                        <Icon name="back" className="h-6" />
+                    </a>
+                    <h2 className="text-xl font-bold">Entre na sua conta</h2>
+                </div>
+                <form className="p-4 space-y-6" onSubmit={formik.handleSubmit}>
+                    <Input
+                        type="text"
+                        name="email"
+                        label="Seu e-mail"
+                        placeholder="Digite o seu e-mail"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.email && formik.errors.email} />
 
-                <button
-                    type="submit"
-                    className="block text-center text-white bg-red-500 px-6 py-3 w-full rounded-xl disabled:opacity-50"
-                    disabled={!formik.isValid || formik.isSubmitting}>
-                    {formik.isSubmitting ? 'Carregando... ' : 'Entrar'}
-                </button>
+                    <Input
+                        type="password"
+                        name="password"
+                        label="Sua senha"
+                        placeholder="Digite sua senha"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.password && formik.errors.password} />
 
-            </form>
+                    <button
+                        type="submit"
+                        className="block text-center text-white bg-red-500 px-6 py-3 w-full rounded-xl disabled:opacity-50"
+                        disabled={!formik.isValid || formik.isSubmitting}>
+                        {formik.isSubmitting ? 'Carregando... ' : 'Entrar'}
+                    </button>
+
+                </form>
 
 
 
-        </main>
-    </div>
-);
+            </main>
+        </div>
+    );
 }
