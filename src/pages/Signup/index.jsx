@@ -1,13 +1,4 @@
-//const Input = ({ name, type, placeholder label }) => (
-//    <div className="flex flex-col">
-//        <label htmlFor={name}>{label}</label>
-//        <input name={name} id={name} type={type} placeholder={placeholder} />
-//    caso a propriedade tenha o mesmo nome que o parametro e só seja usado em um lugar como type e placeholder, podemos usar ...props no lugar como abaixo
-//    note que como name será passado para name, id e htmlFor isso não é possível.
-//</div>
-//
 
-//como os campos de inserção de email e senha serão estilizados igual, podemos definir o input como função
 import { Icon, Input } from '~/components'
 import axios from 'axios'
 import { useFormik } from 'formik'
@@ -35,8 +26,17 @@ export const Signup = () => {
                 url: '/users',
                 data: values
             })
+            const result = await axios({
+                method: 'get',
+                baseURL: import.meta.env.VITE_API_URL,
+                url: '/login',
+                auth: {
+                    username: values.email,
+                    password: values.password
+                }
+            })
 
-           setAuth(res.data)
+           setAuth(result.data)
 
         },
         initialValues: {
