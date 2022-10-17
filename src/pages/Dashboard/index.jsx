@@ -95,8 +95,8 @@ export const Dashboard = () => {
                                 homeTeam={game.homeTeam}
                                 awayTeam={game.awayTeam}
                                 gameTime={format(new Date(game.gameTime), 'H:mm')}
-                                homeTeamScore={user?.hunches?.[game.id]?.homeTeamScore.toString() || "0"}
-                                awayTeamScore={user?.hunches?.[game.id]?.awayTeamScore.toString() || "0"}
+                                homeTeamScore={user?.hunches?.[game.id]?.homeTeamScore.toString() || ""}
+                                awayTeamScore={user?.hunches?.[game.id]?.awayTeamScore.toString() || ""}
 
                             />
                         ))}
